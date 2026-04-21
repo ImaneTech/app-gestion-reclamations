@@ -5,8 +5,8 @@ pipeline {
 
         stage('Clone') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/ImaneTech/app-gestion-reclamations.git'
+               git url: 'https://github.com/ImaneTech/app-gestion-reclamations.git', 
+                    branch: 'main'
             }
         }
 
