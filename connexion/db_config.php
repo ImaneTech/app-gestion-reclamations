@@ -1,9 +1,11 @@
 <?php
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'gestion_reclamations');
-define('DB_USER', 'root');
-define('DB_PASS', '');  
+require_once __DIR__ . '/../config/env.php';
+
+define('DB_HOST', envOrDefault('DB_HOST', 'localhost'));
+define('DB_NAME', envOrDefault('DB_NAME', 'gestion_reclamations'));
+define('DB_USER', envOrDefault('DB_USER', 'root'));
+define('DB_PASS', envOrDefault('DB_PASS', ''));  
 
 try {
     $pdo = new PDO(
