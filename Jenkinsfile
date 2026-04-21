@@ -2,32 +2,28 @@ pipeline {
     agent any
 
     stages {
+
         stage('Clone') {
             steps {
-                git url: 'https://github.com/ImaneTech/app-gestion-reclamations.git', 
-                    branch: 'main'
+                git branch: 'main',
+                    url: 'https://github.com/ImaneTech/app-gestion-reclamations.git'
             }
         }
 
         stage('Tests') {
             steps {
-                // Use 'sh' and standard Linux file testing
-                sh 'test -f index.html && echo "index.html exists"'
-                sh 'test -f style.css && echo "style.css exists"'
-                sh 'test -f script.js && echo "script.js exists"'
+                sh 'test -f index.html'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
-                // This requires Docker to be installed inside your Jenkins container
                 sh 'docker build -t app-reclamations:latest .'
             }
         }
 
         stage('Deploy') {
             steps {
-                // Linux syntax for stopping/removing containers
                 sh '''
                     docker stop app-reclamations || true
                     docker rm app-reclamations || true
@@ -38,7 +34,7 @@ pipeline {
     }
 
     post {
-        success { echo 'Pipeline reussi!' }
-        failure { echo 'Pipeline echoue!' }
+        success { echo 'SUCCESS' }
+        failure { echo 'FAILED' }
     }
 }
